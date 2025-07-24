@@ -5,7 +5,7 @@ import agents from "./routes/agent.routes.js"
 import login from "./routes/login.routes.js"
 import openMongoConnection from "./db/connection.js";
 
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(cors());

@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import {
@@ -9,7 +10,7 @@ import Record from "./components/Record";
 import RecordList from "./components/RecordList";
 import Login from "./components/Login";
 import Unauthorized from "./components/Unauthorized";
-// import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./components/PrivateRoute";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -29,7 +30,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/edit/:id",
-        element: <Record />,
+        element: (
+          <PrivateRoute>
+            <Record />
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -39,7 +44,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/create",
-        element: <Record />,
+        element: (
+          <PrivateRoute>
+            <Record />
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -49,7 +58,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/agent",
-        element: <RecordList />,
+        element: (
+          <PrivateRoute>
+            <RecordList />
+          </PrivateRoute>
+        ),
       },
     ],
   },
