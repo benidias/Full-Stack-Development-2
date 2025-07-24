@@ -7,6 +7,9 @@ import {
 import App from "./App";
 import Record from "./components/Record";
 import RecordList from "./components/RecordList";
+import Login from "./components/Login";
+import Unauthorized from "./components/Unauthorized";
+// import PrivateRoute from "./components/PrivateRoute";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -16,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <RecordList />,
+        element: <Login />,
       },
     ],
   },
@@ -40,6 +43,26 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/agent",
+    element: <App />,
+    children: [
+      {
+        path: "/agent",
+        element: <RecordList />,
+      },
+    ],
+  },
+  {
+    path: "/unauthorized",
+    element: <App />,
+    children: [
+      {
+        path: "/unauthorized",
+        element: <Unauthorized />,
+      },
+    ],
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
