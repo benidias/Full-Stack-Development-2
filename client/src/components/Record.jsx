@@ -77,7 +77,7 @@ export default function Record() {
       console.error('A problem occurred with your fetch operation: ', error);
     } finally {
       setForm({ name: "", region: "", rating: "", fee:"" });
-      navigate("/");
+      navigate("/agent");
     }
   }
 
@@ -136,7 +136,7 @@ export default function Record() {
                     name="region"
                     id="region"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder="Developer Advocate"
+                    placeholder="north, south, east, west"
                     value={form.region}
                     onChange={(e) => updateForm({ region: e.target.value })}
                   />
@@ -157,7 +157,7 @@ export default function Record() {
                     name="rating"
                     id="rating"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder="Developer Advocate"
+                    placeholder="add rating"
                     value={form.rating}
                     onChange={(e) => updateForm({ rating: e.target.value })}
                   />
@@ -178,7 +178,7 @@ export default function Record() {
                     name="fee"
                     id="fee"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-slate-900 placeholder:text-slate-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder="Developer Advocate"
+                    placeholder="add rating"
                     value={form.fee}
                     onChange={(e) => updateForm({ fee: e.target.value })}
                   />

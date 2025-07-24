@@ -31,7 +31,7 @@ router.post("/", async (req, res) => {
       fee: req.body.fee
     };
 
-    const agent = agentSchema.create(newDocument)
+    const agent = await agentSchema.create(newDocument)
     res.send(agent).status(204);
   } catch (err) {
     console.error(err);
@@ -52,7 +52,7 @@ router.patch("/:id", async (req, res) => {
       },
     };
 
-    const agent = agentSchema.updateOne(query, updates)
+    const agent = await agentSchema.updateOne(query, updates)
     res.send(agent).status(200);
   } catch (err) {
     console.error(err);
