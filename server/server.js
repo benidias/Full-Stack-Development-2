@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 // app.use("/record", records);
 app.use("/login", login)
-app.use("/agent", agents)
+app.use("/admin", agents)
 
 openMongoConnection()
 // start the Express server

@@ -14,7 +14,7 @@ const Login = () => {
     try {
       const res = await axios.post('http://localhost:3000/login', { username, password });
       localStorage.setItem('token', res.data.token);
-      navigate('/agent'); 
+      navigate('/admin'); 
     } catch (err) {
       navigate('/unauthorized')
       console.log(err)

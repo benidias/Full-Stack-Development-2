@@ -18,7 +18,7 @@ export default function Record() {
       if(!id) return;
       setIsNew(false);
       const response = await fetch(
-        `http://localhost:3000/agent/${params.id.toString()}`
+        `http://localhost:3000/admin/${params.id.toString()}`
       );
       if (!response.ok) {
         const message = `An error has occurred: ${response.statusText}`;
@@ -28,7 +28,7 @@ export default function Record() {
       const record = await response.json();
       if (!record) {
         console.warn(`Record with id ${id} not found`);
-        navigate("/");
+        navigate("/admin");
         return;
       }
       setForm(record);
@@ -52,16 +52,20 @@ export default function Record() {
       let response;
       if (isNew) {
         // if we are adding a new record we will POST to /record.
-        response = await fetch("http://localhost:3000/agent", {
+        response = await fetch("http://localhost:3000/admin", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(person),
         });
+        if (!response.ok) {
+            alert("Users not added, check field")
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
       } else {
         // if we are updating a record we will PATCH to /record/:id.
-        response = await fetch(`http://localhost:3000/agent/${params.id}`, {
+        response = await fetch(`http://localhost:3000/admin/${params.id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -71,13 +75,14 @@ export default function Record() {
       }
 
       if (!response.ok) {
+        alert("Users not added, check field")
         throw new Error(`HTTP error! status: ${response.status}`);
       }
     } catch (error) {
       console.error('A problem occurred with your fetch operation: ', error);
     } finally {
       setForm({ name: "", region: "", rating: "", fee:"" });
-      navigate("/agent");
+      navigate("/admin");
     }
   }
 

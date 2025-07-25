@@ -25,11 +25,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/edit/:id",
+    path: "/admin/edit/:id",
     element: <App />,
     children: [
       {
-        path: "/edit/:id",
+        path: "/admin/edit/:id",
         element: (
           <PrivateRoute>
             <Record />
@@ -39,11 +39,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/create",
+    path: "/admin/create",
     element: <App />,
     children: [
       {
-        path: "/create",
+        path: "/admin/create",
         element: (
           <PrivateRoute>
             <Record />
@@ -53,11 +53,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/agent",
+    path: "/admin",
     element: <App />,
     children: [
       {
-        path: "/agent",
+        path: "/admin",
         element: (
           <PrivateRoute>
             <RecordList />

@@ -19,7 +19,7 @@ const Record = (props) => (
       <div className="flex gap-2">
         <Link
           className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-slate-100 h-9 rounded-md px-3"
-          to={`/edit/${props.record._id}`}
+          to={`/admin/edit/${props.record._id}`}
         >
           Edit
         </Link>
@@ -44,7 +44,7 @@ export default function RecordList() {
   // This method fetches the records from the database.
   useEffect(() => {
     async function getRecords() {
-      const response = await fetch(`http://localhost:3000/agent/`);
+      const response = await fetch(`http://localhost:3000/admin/`);
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         console.error(message);
@@ -59,7 +59,7 @@ export default function RecordList() {
 
   // This method will delete a record
   async function deleteRecord(id) {
-    await fetch(`http://localhost:3000/agent/${id}`, {
+    await fetch(`http://localhost:3000/admin/${id}`, {
       method: "DELETE",
     });
     const newRecords = records.filter((el) => el._id !== id);
