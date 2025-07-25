@@ -114,3 +114,13 @@ What are a few alternate tech stacks?
     Database: SQL Server
     Good for: Enterprise apps, finance, or government systems
     Downside: Microsoft ecosystem may add licensing or hosting cost
+
+Mern Repo :
+1. https://github.com/gitdagray/mern_stack_course:
+
+    A Redux store holds the entire state of the application in one central location, making it easier to manage and debug. 
+    It allows components to access state and dispatch actions consistently through a predictable flow.
+
+2. https://github.com/amazingandyyy/mern:
+    
+    Deploying to Heroku involves pushing the application code to a remote Heroku Git repository, where Heroku automatically builds and runs the app. It supports various languages and frameworks, and you can easily configure environment variables, scale resources, and monitor app performance from the Heroku dashboard.
