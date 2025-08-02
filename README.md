@@ -1,5 +1,11 @@
 # Full-Stack-Development-2
 
+React components are reusable, self-contained pieces of code that define how a portion of the user interface (UI) should appear and behave. Each component can manage its own state and props, and React efficiently updates and renders components when data changes.
+
+Props (short for "properties") are read-only inputs passed from a parent component to a child component in React. They allow components to be dynamic by receiving data and behavior (like functions) from their parent.
+
+State in React is a built-in object that stores dynamic data within a component. It allows components to track and respond to user interactions, changes, or events by re-rendering the UI when the state updates.
+
 What isthe difference between React, React JS, and React Native?
     1. React
     "React" is often used as a shorthand for React JS, the core library developed by Meta (Facebook).
