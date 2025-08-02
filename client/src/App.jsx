@@ -8,7 +8,7 @@ import { getCookie } from "react-use-cookie";
 const App = () => {
   const sessionToken = getCookie("sessionToken");
   const navigate = useNavigate();
-  
+  const [fullname, setFullname] = useState("");
   useEffect(() => {
     const validateToken = async () => {
       try {
@@ -16,7 +16,8 @@ const App = () => {
         const data = await response.json();
         console.log(data)
         const { valid, user } = data.data;
-        
+        const {username} = user;
+        setFullname(`${username}`);
         
         if (!valid) {
           navigate("/");
@@ -32,7 +33,7 @@ const App = () => {
   }, [sessionToken, navigate]);
   return (
     <div className="w-full p-6">
-      <Navbar />
+      <Navbar fullname={fullname} />
       <Outlet />
     </div>
   );

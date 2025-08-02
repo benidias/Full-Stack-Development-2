@@ -3,7 +3,7 @@ import React from 'react';
 import { useEffect } from "react";
 import { useState } from "react";
 
-export default function Navbar() {
+export default function Navbar({fullname}) {
     const isAuthenticated = () => {
         return !!localStorage.getItem('token');
     };
@@ -14,7 +14,10 @@ export default function Navbar() {
           <img alt="Rocket logo" style={{"width" : 12 + '%'}} src="../src/assets/images/rocketLogo.png"></img>
         </NavLink>
 
-        
+          {fullname && (  
+                <span className="nav-link">{fullname}</span>
+            )}
+
         {!!isAuthenticated && 
             <button onClick={()=>{
                 localStorage.removeItem('token');
