@@ -111,7 +111,10 @@ const Transaction = () => {
     }
 
   const renderTransactions = () => {
-        return transactions.map((transaction) => (
+        const sortedTransactions = [...transactions].sort(
+            (a, b) => new Date(b.date) - new Date(a.date)
+        );
+        return sortedTransactions.map((transaction) => (
             <tr key={transaction._id}>
                 <td>
                     {transaction.agentId} 
