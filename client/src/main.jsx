@@ -9,9 +9,12 @@ import App from "./App";
 import Record from "./components/Record";
 import RecordList from "./components/RecordList";
 import Login from "./components/Login";
+import Admin from "./components/admin";
+import Transaction from "./components/Transaction";
 import Unauthorized from "./components/Unauthorized";
 import PrivateRoute from "./components/PrivateRoute";
 import "./index.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const router = createBrowserRouter([
   {
@@ -60,7 +63,35 @@ const router = createBrowserRouter([
         path: "/admin",
         element: (
           <PrivateRoute>
+            <Admin />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/admin/recordList",
+    element: <App />,
+    children: [
+      {
+        path: "/admin/recordList",
+        element: (
+          <PrivateRoute>
             <RecordList />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/transaction",
+    element: <App />,
+    children: [
+      {
+        path: "/transaction",
+        element: (
+          <PrivateRoute>
+            <Transaction />
           </PrivateRoute>
         ),
       },

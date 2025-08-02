@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { Button, Modal, Alert } from 'react-bootstrap';
 
 const Record = (props) => (
   <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
@@ -40,6 +41,10 @@ const Record = (props) => (
 
 export default function RecordList() {
   const [records, setRecords] = useState([]);
+  const [_id, setID]=useState("")
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showAlertError, setShowAlertError] = useState(false);
+  const [showAlertSuccess, setShowAlertSuccess] = useState(false);
 
   // This method fetches the records from the database.
   useEffect(() => {
@@ -59,12 +64,35 @@ export default function RecordList() {
 
   // This method will delete a record
   async function deleteRecord(id) {
-    await fetch(`http://localhost:3000/admin/${id}`, {
+    try{
+      await fetch(`http://localhost:3000/admin/${id}`, {
       method: "DELETE",
-    });
-    const newRecords = records.filter((el) => el._id !== id);
-    setRecords(newRecords);
+      });
+      const newRecords = records.filter((el) => el._id !== id);
+      setRecords(newRecords);
+      setShowAlertSuccess(true)
+      setShowConfirmation(false)
+      setTimeout(() => {
+        setShowAlertSuccess(false);
+      }, 5000);
+    }catch(error){
+      console.log("error is: "+ error.message)
+      setShowAlertError(true)
+      setShowConfirmation(false)
+      setTimeout(() => {
+        setShowAlertError(false);
+      }, 5000);
+    }
+    
   }
+  const handleCloseConfirmation = () => {
+    setShowConfirmation(false);
+  };
+  const handleSubmit = (id) => {
+
+    setShowConfirmation(true);
+    setID(id)
+  };
 
   // This method will map out the records on the table
   function recordList() {
@@ -72,7 +100,7 @@ export default function RecordList() {
       return (
         <Record
           record={record}
-          deleteRecord={() => deleteRecord(record._id)}
+          deleteRecord={()=>handleSubmit(record._id)}
           key={record._id}
         />
       );
@@ -82,7 +110,20 @@ export default function RecordList() {
   // This following section will display the table with the records of individuals.
   return (
     <>
+    {showAlertError && (
+      <Alert variant="danger" onClose={() => setShowAlertError(false)} dismissible>
+        user not deleted
+      </Alert>
+    )}
+    {showAlertSuccess && (
+        <Alert variant="success" onClose={() => setShowAlertSuccess(false)} dismissible>
+          user deleted succesfully
+        </Alert>
+      )}
       <h3 className="text-lg font-semibold p-4">Agent List</h3>
+      <NavLink className="inline-flex items-center justify-center whitespace-nowrap text-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-slate-100 h-9 rounded-md px-3" to="/admin/create">
+          Create Employee
+        </NavLink>
       <div className="border rounded-lg overflow-hidden">
         <div className="relative w-full overflow-auto">
           <table className="w-full caption-bottom text-sm">
@@ -110,6 +151,22 @@ export default function RecordList() {
             </tbody>
           </table>
         </div>
+         <Modal show={showConfirmation} onHide={handleCloseConfirmation}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Confirmation</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure you want to submit the transaction?</Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleCloseConfirmation}>
+                    Cancel
+                  </Button>
+                  <Button variant="primary" onClick={()=>{deleteRecord(_id)
+                    setShowConfirmation(false);
+                  }}>
+                    Confirm
+                  </Button>
+                </Modal.Footer>
+              </Modal>
       </div>
     </>
   );

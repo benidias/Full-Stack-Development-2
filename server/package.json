@@ -17,6 +17,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.17.0",
     "mongoose": "^8.16.4",
-    "nodeman": "^1.1.2"
+    "nodeman": "^1.1.2",
+    "uuid": "^11.1.0"
   }
 }
